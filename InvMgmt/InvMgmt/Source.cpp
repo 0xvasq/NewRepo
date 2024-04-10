@@ -19,6 +19,7 @@ public:
 	void getData(void);
 	void showData(void);
 	void removeItem(void);
+	void sumInv();
 
 };
 
@@ -26,10 +27,10 @@ void invItem::CNT(void) {
 	count = 0;
 };
 
-void invItem::getData(void) {
-	cout << "Please enter the item's name:";
+void invItem::getData(void) { 
+	cout << "Please enter the item's name: ";
 	cin >> name[count];
-	cout << "Please enter the Item's code";
+	cout << "Please enter the Item's code: ";
 	cin >> itemCode[count];
 	cout << "Please enter item's quantity: ";
 	cin >> quantity[count];
@@ -46,11 +47,12 @@ void invItem::showData(void) {
 			cout << "The item name is: " << name[i] << endl;
 			cout << "The code name is: " << itemCode[i] << endl;
 			cout << "The item quantity is: " << quantity[i] << endl;
-			cout << "The item price is: " << price[i] << endl;
+			cout << "The item price is: $" << price[i] << endl;
 			cout << endl;
 		}
 	}
-	else { cout << "try again" << endl; }
+	else { cout << "There are no items in the inventory, try again." << endl; }
+	cout << endl;
 };
 
 void invItem::removeItem(void) {
@@ -76,7 +78,17 @@ void invItem::removeItem(void) {
 	cout << "Item with item code " << x << " not found in inventory" << endl;
 }
 
+void invItem::sumInv() {
+	float sum = 0;
+	
 
+	for (int i = 0; i < count; i++) {
+		sum += price[i]*quantity[i];
+	};
+
+	cout << "The total of inventory is $" << sum << endl;
+
+}
 
 int main() {
 	
@@ -85,12 +97,17 @@ int main() {
 	int a;
 	do {
 		cout << "You will see a list of options, please act accordingly" << endl;
+		cout << endl;
 		cout << "Press 1: To display the current inventory." << endl;
 		cout << "Press 2: To add an item." << endl;
-		cout << "Press 3: To remove an item" << endl;
+		cout << "Press 3: To remove an item." << endl;
+		cout << "Press 4: To have price of all inventory." << endl;
+		cout << "Press 5: To exit" << endl;
+		cout << endl;
 
-
+		cout << "Please enter your option: ";
 		cin >> a; 
+		cout << endl;
 		
 		switch (a) {
 		case 1: s.showData();
@@ -98,7 +115,14 @@ int main() {
 		case 2: s.getData();
 			break;
 		case 3: s.removeItem();
+			break;
+		case 4: s.sumInv();
+			break;
+		case 5:;
+		default:
+			cout << "See you soon, try again" << endl;
 		}
+		cout << endl;
 	}
 
 	while (a != 5);
