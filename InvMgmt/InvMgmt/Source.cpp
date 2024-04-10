@@ -18,6 +18,7 @@ public:
 	void CNT(void);
 	void getData(void);
 	void showData(void);
+	void removeItem(void);
 
 };
 
@@ -42,14 +43,38 @@ void invItem::showData(void) {
 	
 	if (count > 0) {
 		for (int i = 0; i < count; i++) {
-			cout << "the item is: " << name[i] << endl;
-			cout << "the item quantity is: " << quantity[i] << endl;
+			cout << "The item name is: " << name[i] << endl;
+			cout << "The code name is: " << itemCode[i] << endl;
+			cout << "The item quantity is: " << quantity[i] << endl;
+			cout << "The item price is: " << price[i] << endl;
+			cout << endl;
 		}
 	}
 	else { cout << "try again" << endl; }
 };
 
-
+void invItem::removeItem(void) {
+	int x;
+	cout << "Please select item to remove: ";
+	cin >> x;
+	for (int i = 0; i < count; i++) {
+		if (itemCode[i] == x) {
+			for (int j = i; j < count - i; j++) {
+				name[j] = name[j+1];
+				quantity[j] = quantity[j+1];
+				price[j] = price[j+1];
+			}
+			name[count - 1] = "";
+			itemCode[count - 1] = 0;
+			quantity[count - 1] = 0;
+			price[count - 1] = 0;
+			count--;
+			cout << "The item with code " << x << " has been deleted." << endl;
+			return;
+		}
+	}
+	cout << "Item with item code " << x << " not found in inventory" << endl;
+}
 
 
 
@@ -72,6 +97,7 @@ int main() {
 			break;
 		case 2: s.getData();
 			break;
+		case 3: s.removeItem();
 		}
 	}
 
