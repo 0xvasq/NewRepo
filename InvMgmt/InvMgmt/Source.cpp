@@ -1,59 +1,81 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
+const int m = 25;
 
 class invItem {
 protected:
-	string name;
-	int quantity;
-	float price; 
+	string name[m];
+	int itemCode[m];
+	int quantity[m];
+	float price[m];
+	int count;
 
-public: 
-	invItem() {
-		name = "N/a";
-		quantity = 0;
-		price = 0.0;
-	};
-
-	invItem(string _name, int _quantity, float _price);
-	void showInv(void);
+public:
+	void CNT(void);
+	void getData(void);
+	void showData(void);
 
 };
 
-invItem::invItem(string _name, int _quantity, float _price) {
-	name = _name;
-	quantity = _quantity;
-	price = _price;
+void invItem::CNT(void) {
+	count = 0;
+};
+
+void invItem::getData(void) {
+	cout << "Please enter the item's name:";
+	cin >> name[count];
+	cout << "Please enter the Item's code";
+	cin >> itemCode[count];
+	cout << "Please enter item's quantity: ";
+	cin >> quantity[count];
+	cout << "Please enter price: ";
+	cin >> price[count];
+	count++;
 
 };
 
-void invItem::showInv() {
+void invItem::showData(void) {
+	
+	if (count > 0) {
+		for (int i = 0; i < count; i++) {
+			cout << "the item is: " << name[i] << endl;
+			cout << "the item quantity is: " << quantity[i] << endl;
+		}
+	}
+	else { cout << "try again" << endl; }
+};
 
-	cout << "The name: " << name << endl;
-	cout << "The quantity: " << quantity << endl;
-	cout << "The price: " << price << endl;
-}
+
+
+
 
 int main() {
+	
+	invItem s;
+	s.CNT();
+	int a;
+	do {
+		cout << "You will see a list of options, please act accordingly" << endl;
+		cout << "Press 1: To display the current inventory." << endl;
+		cout << "Press 2: To add an item." << endl;
+		cout << "Press 3: To remove an item" << endl;
 
-	string _name;
-	int _quantity;
-	float _price;
 
+		cin >> a; 
+		
+		switch (a) {
+		case 1: s.showData();
+			break;
+		case 2: s.getData();
+			break;
+		}
+	}
 
-	cout << "please enter name" << endl;
-	cin >> _name;
-
-	cout << "please enter the quantity" << endl;
-	cin >> _quantity;
-
-	cout << "Please enter the price" << endl;
-	cin >> _price;
-
-	invItem S(_name, _quantity, _price);
-	S.showInv();
+	while (a != 5);
 
 	return 0;
 };
